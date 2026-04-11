@@ -44,6 +44,8 @@ df_map = df[df['Year'] == df['Year'].max()]
 # 2. Dashboard
 app = dash.Dash(__name__)
 
+server = app.server
+
 app.layout = html.Div(style = {'fontFamily': 'Times New Roman', 'padding': '40px', 'backgroundColor': '#f8f9fa'}, children=[
     html.H1("US Energy Transition: Strategic Policy Tool", style = {'textAlign': 'center', 'marginBottom': '30px'}),
     
@@ -122,4 +124,4 @@ def update_dashboard(clickData):
     return task1, task2, task3, verdict, v_style
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug = True, host='0.0.0.0', port=int(os.environ.get("PORT", 8080))))
