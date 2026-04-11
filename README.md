@@ -7,3 +7,5 @@ Video: https://drive.google.com/file/d/1clRchJbHKIxHQj94HrL6fhQZJmvKE_B4/view?us
 Slides: https://docs.google.com/presentation/d/1DZCM81lPztXTHWFvPaKw73Rg8d8KEAqljnTUriAG7S8/edit?usp=sharing
 
 Document: https://docs.google.com/document/d/16d-Kb_OGa7-ObfyxhWDaMJ6UdBsHGuv9PnYU56KvNcQ/edit?usp=sharing 
+
+Note: Hamzah and I collaborated on everything and submitted in this repository. I have added him as a collaborator to this repository as well. 
