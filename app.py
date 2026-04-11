@@ -3,6 +3,7 @@ from dash import dcc, html, Input, Output
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import os  # <--- FIXED: Added this import
 
 # 1. Data Prep
 df = pd.read_csv('energy.csv')
@@ -34,9 +35,7 @@ renew_keys = ['.Solar', '.Wind', '.Wood', '.Geothermal', '.Hydropower']
 df['Renew_Total'] = df[[c for c in cols if 'Consumption.' in c and any(k in c for k in renew_keys)]].sum(axis = 1)
 
 df['Fossil_Total'] = df['Total_Coal'] + df['Total_Gas'] + df['Total_Petro']
-
 df['Total_Energy'] = df[[c for c in cols if 'Consumption.' in c]].sum(axis = 1)
-
 df['Renew_Share'] = (df['Renew_Total'] / df['Total_Energy']) * 100
 
 df_map = df[df['Year'] == df['Year'].max()]
@@ -44,6 +43,7 @@ df_map = df[df['Year'] == df['Year'].max()]
 # 2. Dashboard
 app = dash.Dash(__name__)
 
+# EXPOSE SERVER FOR GUNICORN
 server = app.server
 
 app.layout = html.Div(style = {'fontFamily': 'Times New Roman', 'padding': '40px', 'backgroundColor': '#f8f9fa'}, children=[
@@ -65,7 +65,7 @@ app.layout = html.Div(style = {'fontFamily': 'Times New Roman', 'padding': '40px
     html.Div(id='verdict-box', style = {'padding': '25px', 'fontSize': '26px', 'textAlign': 'center', 'borderRadius': '12px', 'marginBottom': '30px', 'fontWeight': 'bold'}),
 
     # ROW 1: Task 1 and Task 2 (Side by Side)
-    html.Div(style = {'display': 'flex', 'gap': '25px', 'marginBottom': '30apx'}, children=[
+    html.Div(style = {'display': 'flex', 'gap': '25px', 'marginBottom': '30px'}, children=[ # FIXED: Changed 30apx to 30px
         html.Div([
             dcc.Graph(id='task1-abs', style = {'height': '500px'}) 
         ], style = {'width': '50%', 'backgroundColor': 'white', 'padding': '15px', 'borderRadius': '15px', 'boxShadow': '0px 4px 12px rgba(0,0,0,0.1)'}),
@@ -124,4 +124,5 @@ def update_dashboard(clickData):
     return task1, task2, task3, verdict, v_style
 
 if __name__ == '__main__':
-    app.run(debug = True, host='0.0.0.0', port=int(os.environ.get("PORT", 8080))))
+    # FIXED: Corrected parentheses and added os import
+    app.run_server(debug=True, host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
