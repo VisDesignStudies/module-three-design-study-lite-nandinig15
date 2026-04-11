@@ -1,4 +1,4 @@
-Links to Nandini and Hmazah's: 
+Links to Nandini and Hamzah's: 
 
 Live deployed website: https://module-three-design-study-lite-pn5c.onrender.com/
 
